@@ -2,6 +2,7 @@ package builder
 
 import (
 	"context"
+
 	"github.com/metacall/builder/pkg/staging"
 	"github.com/moby/buildkit/client/llb"
 	"github.com/spf13/cobra"
@@ -38,7 +39,9 @@ func NewDevDepsBaseCmd() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			depsBase := staging.Deps.Base(base, branch)
+
+			myDeps := staging.Deps{}
+			depsBase := myDeps.Base(base, branch)
 
 			// set final state
 			cmd.SetContext(context.WithValue(cmd.Context(), finalKey{}, depsBase))
