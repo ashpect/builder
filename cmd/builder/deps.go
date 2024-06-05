@@ -21,8 +21,12 @@ func NewDepsCmd(o *DepOptions) *cobra.Command {
 		Use:   "deps",
 		Short: "Build development dependencies base image for MetaCall",
 		RunE: func(cmd *cobra.Command, args []string) error {
+
+			mb := staging.NewMetaBuilder()
 			base := cmd.Context().Value(baseKey{}).(llb.State)
-			depsBase := staging.DepsBase(base, branch, args)
+			mb.ConstructMetaImage("deps", branch, base, args)
+			depsBase := mb.GetDepsImage()
+
 			depsBase, err := o.Run(depsBase)
 			if err != nil {
 				return err
