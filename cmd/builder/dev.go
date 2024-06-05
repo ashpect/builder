@@ -24,7 +24,7 @@ func NewDevCmd(o *DevOptions) *cobra.Command {
 
 			mb := staging.NewMetaBuilder()
 			base := cmd.Context().Value(baseKey{}).(llb.State)
-			mb.ConstructMetaImage("deps", branch, base, args)
+			mb.ConstructMetaImage("dev", branch, base, args)
 			devBase := mb.GetDevImage()
 
 			devBase, err := o.Run(devBase)

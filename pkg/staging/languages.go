@@ -53,12 +53,14 @@ var languageValidate = map[string]Match{
 }
 
 func (mb *metaBuilder) ValidateLanguages(args []string) error {
+	lang := make(map[string]bool)
 	for _, arg := range args {
 		if _, ok := languageValidate[arg]; !ok {
 			return errors.New("Invalid language")
 		}
-		mb.meta.languages[arg] = true
+		lang[arg] = true
 	}
 
+	mb.meta.languages = lang
 	return nil
 }

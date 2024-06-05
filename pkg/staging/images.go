@@ -80,6 +80,8 @@ func (mb *metaBuilder) BuildDevImage() MetaBuilder {
 	if err != nil {
 		panic(err)
 	}
+
+	mb.BuildDepsImage()
 	mb.meta.devImage = mb.meta.depsImage
 	MetaCallConfigure(&mb.meta.devImage, args)
 	MetaCallBuild(&mb.meta.devImage)
@@ -96,10 +98,6 @@ func (mb *metaBuilder) BuildRuntimeImage() MetaBuilder {
 	MetacallRuntime(&mb.meta.runtimeImage, args)
 
 	return mb
-}
-
-func (mb *metaBuilder) Build() *Meta {
-	return mb.meta
 }
 
 func (mb *metaBuilder) ConstructMetaImage(imgtype string, branch string, base llb.State, args []string) *Meta {
@@ -120,4 +118,8 @@ func (mb *metaBuilder) ConstructMetaImage(imgtype string, branch string, base ll
 	}
 
 	return mb.Build()
+}
+
+func (mb *metaBuilder) Build() *Meta {
+	return mb.meta
 }
