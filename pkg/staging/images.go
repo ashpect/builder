@@ -102,6 +102,11 @@ func (mb *metaBuilder) BuildRuntimeImage() MetaBuilder {
 
 func (mb *metaBuilder) ConstructMetaImage(imgtype string, branch string, base llb.State, args []string) *Meta {
 
+	err := mb.ValidateLanguages(args)
+	if err != nil {
+		panic(err)
+	}
+
 	mb.SetBranch(branch)
 	mb.BuildBaseImage(base)
 	if imgtype == "deps" {
@@ -110,11 +115,6 @@ func (mb *metaBuilder) ConstructMetaImage(imgtype string, branch string, base ll
 		mb.BuildDevImage()
 	} else if imgtype == "runtime" {
 		mb.BuildRuntimeImage()
-	}
-
-	err := mb.ValidateLanguages(args)
-	if err != nil {
-		panic(err)
 	}
 
 	return mb.Build()
