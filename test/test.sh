@@ -29,3 +29,7 @@ echo "Building runtime mode with all languages."
 export BUILDER_ARGS="runtime py node rb"
 ${DOCKER_CMD} up --exit-code-from ${DOCKER_SERVICE} ${DOCKER_SERVICE}
 ${DOCKER_CMD} down
+
+# TODO:
+# BUILDER_ARGS="runtime node" docker compose up --exit-code-from client client
+# docker run --rm -t docker.io/metacall/builder_output metacallcli --help
