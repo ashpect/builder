@@ -2,7 +2,6 @@ package staging
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 
 	"github.com/moby/buildkit/client/llb"
@@ -15,7 +14,7 @@ func validateArgs(args []string) (string, error) {
 		if !ok {
 			return "", errors.New("Invalid language: " + arg)
 		}
-		var isExists = false
+		isExists := false
 		for _, str := range cmdArgs {
 			if lang == str {
 				isExists = true
@@ -25,7 +24,6 @@ func validateArgs(args []string) (string, error) {
 			cmdArgs = append(cmdArgs, lang)
 		}
 	}
-	fmt.Println(cmdArgs)
 	return strings.Join(cmdArgs, " "), nil
 }
 

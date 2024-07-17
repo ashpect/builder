@@ -1,8 +1,6 @@
 package staging
 
 import (
-	"fmt"
-
 	"github.com/metacall/builder/pkg/env"
 	"github.com/moby/buildkit/client/llb"
 )
@@ -71,7 +69,6 @@ func RuntimeBase(base llb.State, branch string, args []string) llb.State {
 
 	cmdArgs, err := validateArgs(args)
 	if err != nil {
-		fmt.Println("Hello brother!!")
 		panic(err)
 	}
 
