@@ -14,7 +14,13 @@ func validateArgs(args []string) (string, error) {
 		if !ok {
 			return "", errors.New("Invalid language: " + arg)
 		}
-		cmdArgs = append(cmdArgs, lang)
+		for _, str := range cmdArgs {
+			if str == lang {
+				continue
+			} else {
+				cmdArgs = append(cmdArgs, lang)
+			}
+		}
 	}
 	return strings.Join(cmdArgs, " "), nil
 }
