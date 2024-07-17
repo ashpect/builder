@@ -45,5 +45,5 @@ test node/test.js "0123456789"
 
 # Build the cli image with languages all together
 echo "Building cli mode with all languages."
-export BUILDER_ARGS="runtime --cli py node"
+export BUILDER_ARGS="runtime --cli"
 test node/test.js "0123456789"
