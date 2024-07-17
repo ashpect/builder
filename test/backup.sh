@@ -11,6 +11,7 @@ else
 	exit 1
 fi
 
+#set to first script argument or rootless if no argument is provided
 DOCKER_SERVICE=${1:-rootless}
 
 build() {
@@ -18,12 +19,17 @@ build() {
 }
 
 test() {
+    #build first
 	build
+    #Start the registry service in detached mode.
 	${DOCKER_CMD} up -d registry
+    #It waits for the metacall_builder_registry service to be healthy by checking its Docker health status.
 	while [ ! "$(docker inspect --format '{{json .State.Health.Status }}' metacall_builder_registry)" = "\"healthy\"" ]; do
 		sleep 5
 	done
+    #It runs a Docker container to execute the metacallcli command with the provided argument.
 	docker run --rm -v ./test/suites:/test -t localhost:5000/metacall/builder_output sh -c "metacallcli $1"
+    #It shuts down all services.
 	${DOCKER_CMD} down
 }
 
@@ -45,5 +51,5 @@ test node/test.js "0123456789"
 
 # Build the cli image with languages all together
 echo "Building cli mode with all languages."
-export BUILDER_ARGS="runtime --cli node rb"
+export BUILDER_ARGS="runtime --cli py node rb"
 test node/test.js "0123456789"
