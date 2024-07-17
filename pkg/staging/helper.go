@@ -15,7 +15,6 @@ func validateArgs(args []string) (string, error) {
 		if !ok {
 			return "", errors.New("Invalid language: " + arg)
 		}
-		cmdArgs = append(cmdArgs, lang)
 		var isExists = false
 		for _, str := range cmdArgs {
 			if lang == str {
