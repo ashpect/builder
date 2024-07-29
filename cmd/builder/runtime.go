@@ -2,7 +2,7 @@ package builder
 
 import (
 	"context"
-	
+
 	"github.com/metacall/builder/pkg/staging"
 	"github.com/moby/buildkit/client/llb"
 	"github.com/spf13/cobra"
@@ -22,21 +22,21 @@ func NewRuntimeCmd(o *RuntimeOptions) *cobra.Command {
 		Short: "Build runtime image for MetaCall",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if o.RuntimeImageFlags.MetacallCli {
-				args = append(args,"node")
+				args = append(args, "node")
 			}
 			base := cmd.Context().Value(baseKey{}).(llb.State)
-			devBase := staging.RemoveBuild(staging.DevBase(base, branch, []string{}))
-			devBaseLang := staging.RemoveBuild(staging.DevBase(base, branch, args))
-			runtimeBase := staging.RuntimeBase(base, branch, args)
-			diffed := llb.Diff(devBase, devBaseLang)
 
-			runtime := llb.Merge([]llb.State{runtimeBase, diffed})
+			devBaseLang := staging.DevBase(base,branch,[]string{})
+			devBase := staging.MergeStates(devBaseLang)
+
+			runtimeBase := staging.RuntimeBase(base, branch, args)
+			finalImage := staging.MergeStates(runtimeBase)
 
 			if o.RuntimeImageFlags.MetacallCli {
-				runtime = staging.AddCli(devBaseLang, runtime)
+				finalImage = staging.AddCli(devBase, finalImage)
 			}
 
-			runtime, err := o.Run(runtime)
+			runtime, err := o.Run(finalImage)
 			if err != nil {
 				return err
 			}
