@@ -62,6 +62,8 @@ echo "Building dev mode with NodeJS language."
 export BUILDER_ARGS="dev node"
 test node/test.js "0123456789"
 
+sleep 15
+
 # Build the cli image with languages all together
 echo "Building cli mode with all languages."
 export BUILDER_ARGS="runtime --cli py node rb"
