@@ -3,7 +3,7 @@
 
 Hey I'm Ashish aka Ashpect and I had the oppurtunity to work on the project BUILDER for metacall under the Google Sumemr of Code Mentrship porogram.
 
-You could find the project proposal doc [here](https://docs.google.com/document/d/1A4mXeMjOwjf9mdiE0yejHE5CYKSKUK1G6_K88jG9hWM/edit#heading=h.z6ne0og04bp5) or in proposal.md in the same repo as a backup. Howecer, the proposal doc is better formatted and easier to read.
+You could find the project on gsoc's page [here](https://summerofcode.withgoogle.com/programs/2024/projects/2hrok7vn) and the original proposal doc [here](https://docs.google.com/document/d/1A4mXeMjOwjf9mdiE0yejHE5CYKSKUK1G6_K88jG9hWM/edit#heading=h.z6ne0og04bp5) or in proposal.md in the same repo as a backup. However,I'd suggest reading the doc as it is better formatted and easier to read and markdown file is a backup.
 
 ### Overview
 
